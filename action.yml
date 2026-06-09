@@ -9,8 +9,12 @@ inputs:
     description: 'Your TerraLens API key (Pro users only). Get one at https://terralens.io/account. Leave blank for free-tier per-repo limits.'
     required: false
   plan-file:
-    description: 'Path to your terraform plan output file (e.g., the result of `terraform show -no-color tfplan > plan.txt`)'
+    description: 'Path to your terraform plan output file (e.g., the result of `terraform show -json tfplan > plan.json`)'
     required: true
+  format:
+    description: 'Plan format: "json" (recommended, from `terraform show -json`) or "text". Leave blank to auto-detect from the file contents.'
+    required: false
+    default: ''
   github-token:
     description: 'GitHub token for posting PR comments (defaults to GITHUB_TOKEN)'
     required: false

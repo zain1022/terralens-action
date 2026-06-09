@@ -51,6 +51,7 @@ async function run() {
         const apiKey = core.getInput("api-key");
         const planFile = core.getInput("plan-file", { required: true });
         const githubToken = core.getInput("github-token", { required: true });
+        const format = core.getInput("format"); // optional: "json" | "text"; empty = backend auto-detects
         if (!fs.existsSync(planFile)) {
             core.setFailed(`Plan file not found at path: ${planFile}`);
             return;
@@ -80,6 +81,7 @@ async function run() {
                 planText,
                 repo: repoIdentifier,
                 prNumber: prNumber || null,
+                ...(format ? { format } : {}),
             }),
         });
         if (!response.ok) {
